@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children, className }) => {
   if (!isOpen) return null;
 
   return (
@@ -12,17 +12,18 @@ const Modal = ({ isOpen, onClose, children }) => {
       ></div>
       
       {/* 모달 컨텐츠 */}
-      <div className="bg-white rounded-lg p-8 relative z-50 w-full max-w-md">
-        {/* 닫기 버튼 */}
-        <button 
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-900"
-        >
-          ✕
-        </button>
-        
-        {/* 모달 내용 */}
-        {children}
+      <div className={`bg-white rounded-lg p-2 relative z-50 w-full max-w-sm ${className}`}>
+          {/* 닫기 버튼 */}
+          <button 
+            onClick={onClose}
+            className="block pr-1 ml-auto text-gray-500 hover:text-gray-900 font-bold text-xl"
+          >
+            ✕
+          </button>
+        <div className='p-6'>
+          {/* 모달 내용 */}
+          {children}
+        </div>
       </div>
     </div>
   );

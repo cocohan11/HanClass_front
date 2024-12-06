@@ -12,16 +12,16 @@ function Header() {
   return (
     <>
     <header className="fixed top-0 left-0 right-0 w-full bg-white shadow-md z-50">
-      <div className="flex justify-between max-w-[1300px] mx-auto">
+      <div className="flex justify-between max-w-[1200px] mx-auto">
         {/* 사이트 이름 */}
         <Link to="/" className="">
-        <span className="block text-4xl font-['Tenada'] p-8 pb-3">한클래스</span>
+        <span className="block text-3xl font-['Tenada'] p-2 px-4 pt-4">한클래스</span>
         </Link>
 
         {/* 로그인 버튼 */}
         <button 
             onClick={openModal}
-            className="text-black-600 hover:text-yellow-800 font-['Tenada'] items-center flex p-8"
+            className="text-black-600 hover:text-yellow-800 font-['Tenada'] items-center flex p-2 px-4 pt-4"
           >
             로그인
           </button>
