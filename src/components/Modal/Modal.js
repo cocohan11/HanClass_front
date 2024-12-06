@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.css';
 
 const Modal = ({ isOpen, onClose, children, className }) => {
   if (!isOpen) return null;
@@ -12,11 +13,11 @@ const Modal = ({ isOpen, onClose, children, className }) => {
       ></div>
       
       {/* 모달 컨텐츠 */}
-      <div className={`bg-white rounded-lg p-2 relative z-50 w-full max-w-sm ${className}`}>
+      <div className={`bg-white rounded-lg p-2 z-50 w-full max-w-sm ${className}`}>
           {/* 닫기 버튼 */}
           <button 
             onClick={onClose}
-            className="block pr-1 ml-auto text-gray-500 hover:text-gray-900 font-bold text-xl"
+            className="close-button text-gray-500 hover:text-gray-900 font-bold text-xl"
           >
             ✕
           </button>
