@@ -394,12 +394,9 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        {/* 기존 모달 내용 */}
-        <div className={getModalClassName()}>
-          {renderContent()}
-        </div>
-      </Modal>
+    <Modal isOpen={isOpen} onClose={handleClose} className={getModalClassName()}>
+      {renderContent()}
+    </Modal>
 
       {/* 로그인완료 알림 모달 */}
       <AlertModal
