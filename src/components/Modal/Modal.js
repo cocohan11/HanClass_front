@@ -21,7 +21,7 @@ const Modal = ({ isOpen, onClose, children, className }) => {
           >
             ✕
           </button>
-        <div className='p-6'>
+        <div className='p-6 pt-1'>
           {/* 모달 내용 */}
           {children}
         </div>

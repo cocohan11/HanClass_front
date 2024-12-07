@@ -13,16 +13,7 @@
 }
 
 .login-modal.no-bg {
-    background-color: white;
-}
-
-
-.login-modal {
-    text-align: center;
-    position: relative;
-    background-image: url(../../assets/images/modar/bg_orange.png);
-    background-repeat: no-repeat;
-
+    background-color: rgb(255, 255, 255);
 }
 
 .login-modal::before {
@@ -82,7 +73,6 @@
     position: relative;
     transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     font-family: 'Pretendard';
-
 }
 
 .login-modal .kakao-login {
@@ -129,11 +119,35 @@
     margin-top: 1.5rem;
     margin-bottom: 6rem;
     text-decoration: underline;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .login-modal .text-link:hover {
     color: #0b0b0e; /* gray-700 */
+}
+
+.login-modal small {
+    font-size: 12px;     /* 직접 크기 지정 */
+    color: #b8b8b8;         /* 글자 색상 */
+    display: block;      /* 블록 요소로 변경 */
+    margin-top: 6px;     /*위쪽 여백*/
+    margin-left: 6px;
+    text-align-last: left;
+    font-family: 'Pretendard';
+}
+
+.login-modal .wrong-text {
+    color: #fca4a4;         /* 경고 글자 색상 */
+    text-align-last: left !important;
+}
+.login-modal .wrong-border {
+    border-color: #fca4a4 !important;
+}
+.login-modal .reset-password small {
+    text-align-last: center;
+}
+.login-modal .reset-password form {
+    gap: 0.5rem !important;
 }
