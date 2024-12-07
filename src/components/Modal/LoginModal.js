@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import './LoginModal.css';
 import { User, Lock } from 'lucide-react';
+import AlertModal from './AlertModal.js'
 
 
 const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -12,6 +13,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   const [confirmPassword, setConfirmPassword] = useState(''); // 비밀번호 확인 값
   const [isValidPassword, setIsValidPassword] = useState(false); // 비밀번호 확인 값의 유효성 여부
   const [passwordsMatch, setPasswordsMatch] = useState(false);  // 비밀번호 동일한지 여부
+  const [showAlert, setShowAlert] = useState(false); // 로그인 완료 알림 모달 표시 여부
 
 
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/; // 비밀번호 정규식 (영문, 숫자, 특수문자 조합 8자 이상)
@@ -24,7 +26,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     setPasswordsMatch(false);
   };
 
-  
+
   // modalType이 변경될 때 초기화
   useEffect(() => {
     resetForm();
@@ -39,6 +41,11 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   }, [isOpen]);
 
 
+  // 알림 모달 닫기 핸들러
+  const handleAlertClose = () => {
+    setShowAlert(false);
+  };
+  
   // 버튼 활성화 조건을 확인하는 함수
   const isButtonEnabled = () => {
     if (modalType === 'signup') {
@@ -90,11 +97,29 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     onClose(); // 기존의 onClose 함수 실행
   };
   
+  // 로그인/회원가입 폼 제출 이후 처리 함수
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLoginSuccess(); // 로그인 성공 알림
+    
+    // 이메일 로그인의 경우
+    if (modalType === 'emailLogin') {
+      if (isValidEmail && isValidPassword) {
+        onLoginSuccess(); // Header의 handleLoginSuccess 호출
+        setShowAlert(true); // 알림 모달 표시
+        handleClose(); // 로그인 모달 닫기
+      }
+    }
+    // 회원가입의 경우
+    else if (modalType === 'signup') {
+      if (isValidEmail && isValidPassword && passwordsMatch) {
+        // 회원가입 처리 로직
+        onLoginSuccess();
+        setShowAlert(true); // 알림 모달 표시
+        handleClose();
+      }
+    }
   };
-
+  
   const handleKakaoLogin = () => {
     // 카카오 로그인 로직
   };
@@ -368,9 +393,21 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} className={getModalClassName()}>
-      {renderContent()}
-    </Modal>
+    <>
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        {/* 기존 모달 내용 */}
+        <div className={getModalClassName()}>
+          {renderContent()}
+        </div>
+      </Modal>
+
+      {/* 로그인완료 알림 모달 */}
+      <AlertModal
+        isOpen={showAlert}
+        onClose={handleAlertClose}
+        message="🥰 로그인 되었습니다!"
+      />
+    </>
   );
 };
 

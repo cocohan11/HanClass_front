@@ -1,9 +1,6 @@
 // x버튼이 없는 모달이라 별도 관리
 
 
-// components/Modal/AlertModal.js
-import { X } from 'lucide-react';
-
 const AlertModal = ({ isOpen, onClose, message }) => {
   // 메시지를 이모지와 텍스트로 분리
   const [emoji, ...textParts] = message.split(' ');
