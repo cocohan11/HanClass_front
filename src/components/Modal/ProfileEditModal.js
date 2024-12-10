@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Camera } from 'lucide-react';
 
 const ProfileEditModal = ({ isOpen, onClose }) => {
+  const fileInputRef = useRef(null);
+  
   // 초기값 상태 저장
   const [initialValues, setInitialValues] = useState({
     profileImage: '/images/profileImg/bear.png',
@@ -13,19 +15,60 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
   const [profileImage, setProfileImage] = useState(initialValues.profileImage);
   const [nickname, setNickname] = useState(initialValues.nickname);
   const [phone, setPhone] = useState(initialValues.phone);
+  const [isImageModified, setIsImageModified] = useState(false);
   
   // 수정 버튼 활성화 상태
   const [isModified, setIsModified] = useState(false);
 
+  // 모달이 닫힐 때 상태 초기화
+  const handleClose = () => {
+    setProfileImage(initialValues.profileImage);
+    setNickname(initialValues.nickname);
+    setPhone(initialValues.phone);
+    setIsImageModified(false);
+    setIsModified(false);
+    onClose();
+  };
+
   // 값이 변경될 때마다 초기값과 비교하여 수정 여부 확인
   useEffect(() => {
     const hasChanges = 
-      profileImage !== initialValues.profileImage ||
+      isImageModified ||
       nickname !== initialValues.nickname ||
       phone !== initialValues.phone;
     
     setIsModified(hasChanges);
-  }, [profileImage, nickname, phone, initialValues]);
+  }, [isImageModified, nickname, phone, initialValues]);
+
+  // 이미지 업로드 처리
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // 파일 크기 체크 (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('파일 크기는 5MB 이하여야 합니다.');
+        return;
+      }
+
+      // 이미지 파일 타입 체크
+      if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드 가능합니다.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfileImage(e.target.result);
+        setIsImageModified(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // 이미지 업로드 버튼 클릭 핸들러
+  const handleImageButtonClick = () => {
+    fileInputRef.current?.click();
+  };
 
   if (!isOpen) return null;
 
@@ -34,16 +77,15 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
       {/* 배경 오버레이 */}
       <div 
         className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose}
+        onClick={handleClose}
       ></div>
       
       <div className="bg-white rounded-lg p-2 z-50 w-full max-w-sm">
         {/* 유저 정보 수정 */}
         <div className="flex justify-between items-center mb-4 px-6 pt-2">
           <h2 className="text-xl font-bold text-gray-800">유저 정보 수정</h2>
-          {/* ✕ */}
           <button 
-            onClick={onClose}
+            onClick={handleClose}
             className="text-gray-500 hover:text-gray-900 font-bold text-xl"
           >
             ✕
@@ -60,11 +102,24 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
                 alt="프로필 이미지"
                 className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
               />
-              <button className="absolute bottom-0 right-0 bg-white rounded-full p-1.5 shadow-md border border-gray-200">
+              <button 
+                onClick={handleImageButtonClick}
+                className="absolute bottom-0 right-0 bg-white rounded-full p-1.5 shadow-md border border-gray-200"
+              >
                 <Camera className="w-5 h-5 text-gray-600" />
               </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
             </div>
-            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <button 
+              onClick={handleImageButtonClick}
+              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+            >
               프로필 사진 변경하기
             </button>
           </div>
@@ -112,10 +167,10 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* 하단 버튼 */}
+          {/* 취소, 수정 버튼 */}
           <div className="flex gap-3 pt-4">
             <button 
-              onClick={onClose}
+              onClick={handleClose}
               className="flex-1 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 text-gray-700"
             >
               취소
