@@ -3,10 +3,12 @@ import React from 'react';
 import { SmileIcon, Edit, Heart, GraduationCap, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import ProfileEditModal from '../Modal/ProfileEditModal';
+import WithdrawalModal from '../Modal/WithdrawalModal';
 
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
 
 
     return (
@@ -96,7 +98,10 @@ const Profile = () => {
             </div>
 
             {/* 한클래스 탈퇴 */}
-            <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer col-span-2 border flex items-center justify-center">
+            <div 
+              className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer col-span-2 border flex items-center justify-center"
+              onClick={() => setIsWithdrawalModalOpen(true)}
+            >
               <div className="flex flex-col items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center">
                   <LogOut className="w-7 h-7 text-gray-500" />
@@ -107,6 +112,10 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            <WithdrawalModal 
+              isOpen={isWithdrawalModalOpen} 
+              onClose={() => setIsWithdrawalModalOpen(false)} 
+            />
           </div>
         </div>
       </div>

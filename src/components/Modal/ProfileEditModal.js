@@ -151,12 +151,12 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
         {/* 모달 내용 */}
         <div className="p-6 pt-2 space-y-6">
           {/* 프로필 이미지 */}
-          <div className="flex flex-col items-center space-y-3">
-            <div className="relative">
+          <div className="flex flex-col items-center space-y-3 ">
+            <div className="relative ">
               <img 
                 src={profileImage}
                 alt="프로필 이미지"
-                className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
+                className="w-24 h-24 rounded-full object-cover border-2 border-gray-200 shadow-lg"
               />
               <button 
                 onClick={handleImageButtonClick}
@@ -186,7 +186,7 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
             {/* 계정 ID */}
             <div className="space-y-1">
               <label className="block text-sm font-medium text-gray-700">계정 ID</label>
-              <div>abc@aaa.com</div>
+              <div className="font-semibold text-gray-700 text-lg">abc@aaa.com</div>
             </div>
 
             {/* 이름(닉네임) */}
@@ -265,7 +265,7 @@ const ProfileEditModal = ({ isOpen, onClose }) => {
               className={`flex-1 px-4 py-2 rounded-md border ${
                 isModified 
                   ? "border-orange-300 bg-orange-100 hover:bg-orange-200 text-orange-500" 
-                  : "border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "border-gray-300 bg-gray-100 text-gray-400"
               }`}
               disabled={!isModified}
             >
