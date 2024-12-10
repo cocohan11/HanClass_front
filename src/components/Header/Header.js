@@ -1,8 +1,8 @@
 // components/Header.js
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import LoginModal from './Modal/LoginModal';
-import UserMenu from './Header/UserMenu.js';
+import LoginModal from '../Modal/LoginModal.js';
+import UserMenu from './UserMenu.js';
 
 
 function Header() {
