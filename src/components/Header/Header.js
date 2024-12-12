@@ -1,6 +1,7 @@
 // components/Header.js
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { FileText } from 'lucide-react';
 import LoginModal from '../Modal/LoginModal.js';
 import UserMenu from './UserMenu.js';
 
@@ -31,16 +32,25 @@ function Header() {
             <span className="block text-3xl font-['Tenada'] p-2 px-4 pt-4">한클래스</span>
           </Link>
 
-          {isLoggedIn ? (
-            <UserMenu onLogout={handleLogout} />
-          ) : (
-            <button 
-              onClick={openModal}
-              className="text-black-600 hover:text-yellow-800 font-['Tenada'] items-center flex p-2 px-4 pt-4"
+          <div className="flex items-center">
+            <Link 
+              to="/class/register" 
+              className="text-gray-600 bg-orange-50 border border-orange-300 hover:bg-orange-100 p-1 px-4 rounded-full mr-4 flex items-center gap-2 font-noto"
             >
-              로그인
-            </button>
-          )}
+              <FileText size={18} />
+              클래스등록
+            </Link>
+            {isLoggedIn ? (
+              <UserMenu onLogout={handleLogout} />
+            ) : (
+              <button 
+                onClick={openModal}
+                className="text-black-600 hover:text-yellow-800 font-['Tenada'] items-center flex p-2 px-4 pt-4"
+              >
+                로그인
+              </button>
+            )}
+          </div>
         </div>
       </header>
 

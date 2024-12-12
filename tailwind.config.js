@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        'tenada':['Tenada']
+        'tenada':['Tenada'],
+        'noto': ['Noto Sans KR', 'sans-serif'],
       },
     },
   },

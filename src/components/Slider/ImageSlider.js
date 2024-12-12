@@ -7,10 +7,10 @@ import SliderIndicator from './SliderIndicator';
 function ImageSlider() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = [
-    '/images/slider/slider1.png',
-    '/images/slider/slider2.png',
-    '/images/slider/slider3.png',
-    '/images/slider/slider4.png'
+    '/images/slider/slider1.jpg',
+    '/images/slider/slider2.jpg',
+    '/images/slider/slider3.jpg',
+    '/images/slider/slider4.jpg'
     ]
 
     // 자동 슬라이드를 위한 useEffect 추가
