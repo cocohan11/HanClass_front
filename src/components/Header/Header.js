@@ -34,7 +34,7 @@ function Header() {
 
           <div className="flex items-center">
             <Link 
-              to="/class/register" 
+              to="/workspace" 
               className="text-gray-600 bg-orange-50 border border-orange-300 hover:bg-orange-100 p-1 px-4 rounded-full mr-4 flex items-center gap-2 font-noto"
             >
               <FileText size={18} />

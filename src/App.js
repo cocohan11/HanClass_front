@@ -6,6 +6,7 @@ import About from './pages/About';
 import Header from './components/Header/Header';
 import ImageSlider from './components/Slider/ImageSlider';
 import Profile from './components/Mypage/Profile';
+import Workspace from './components/Work-space/Workspace';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               } />
               <Route path="/about" element={<About />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/workspace" element={<Workspace />} />
             </Routes>
           </div>
         </main>
