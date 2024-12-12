@@ -38,7 +38,7 @@ function Header() {
               className="text-gray-600 bg-orange-50 border border-orange-300 hover:bg-orange-100 p-1 px-4 rounded-full mr-4 flex items-center gap-2 font-noto"
             >
               <FileText size={18} />
-              클래스등록
+              클래스 등록
             </Link>
             {isLoggedIn ? (
               <UserMenu onLogout={handleLogout} />
