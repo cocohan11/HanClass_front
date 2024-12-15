@@ -20,7 +20,7 @@ function App() {
 
         {/* 메인 컨텐츠 */}
         <main className="flex-1 overflow-auto">
-          {/* <div className="max-w-[1300px] mx-auto p-8"> */}
+          {/* <div className="max-w-[1200px] mx-auto p-8"> */}
           <div className="mx-auto">
             <Routes>
               <Route path="/" element={ // 이미지슬라이더를 홈에서만 보기
