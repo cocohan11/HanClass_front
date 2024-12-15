@@ -3,8 +3,8 @@ import {
   MapPin, Grid, Users, 
   Cake, GemIcon, Paintbrush, Gift, Heart, 
   Droplets, Dumbbell, Hammer, Palette,
-  ChevronDown
 } from 'lucide-react';
+
 
 const ContainerWithButtons = () => {
   const [showRegions, setShowRegions] = useState(false);
@@ -40,7 +40,6 @@ const ContainerWithButtons = () => {
 
   // 컴포넌트가 마운트될 때 실행되는 효과
   useEffect(() => {
-
      // 사용자가 클릭한 위치가 드롭다운 메뉴 외부인지 확인하는 함수
     const handleClickOutside = (event) => {
       // dropdownRef(지역 메뉴)가 존재하고, 클릭된 위치가 지역 메뉴 영역 외부인 경우
@@ -52,7 +51,6 @@ const ContainerWithButtons = () => {
         setShowCategories(false); // 카테고리 메뉴를 닫음
       }
     };
-
     // 문서 전체에 클릭 이벤트 리스너 추가
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -61,13 +59,16 @@ const ContainerWithButtons = () => {
     };
   }, []); // 컴포넌트가 처음 생성될 때(마운트)만 실행됨
 
+
+  //--------------------------------------------------------------------
   return (
     <div className="w-full flex justify-center px-4">
       <div className="w-full max-w-[1200px] mt-4">
         
-        {/* 메인 버튼 섹션 */}
+        {/* 메인 2개 섹션 */}
         <div className="grid grid-cols-2 gap-6 p-4">
           <div className="relative" ref={dropdownRef}>
+            {/* 지역 버튼 */}
             <button 
               onClick={() => setShowRegions(!showRegions)}
               className="border flex items-center justify-center h-30 w-full bg-white rounded-2xl 
@@ -82,7 +83,7 @@ const ContainerWithButtons = () => {
               </div>
             </button>
 
-            {/* 지역 메뉴 */}
+            {/* 지역 선택 메뉴 */}
             {showRegions && (
               <div className="absolute z-10 w-full mt-2 bg-white border rounded-xl shadow-lg p-4">
                 <div className="grid grid-cols-4 gap-2">
@@ -101,6 +102,7 @@ const ContainerWithButtons = () => {
           </div>
           
           <div className="relative" ref={categoryRef}>
+            {/* 카테고리리 버튼 */}
             <button 
               onClick={() => setShowCategories(!showCategories)}
               className="border flex items-center justify-center h-30 w-full bg-white rounded-2xl 
@@ -133,7 +135,7 @@ const ContainerWithButtons = () => {
             )}
           </div>
         </div>
-            {/* 카테고리 버튼 섹션 추가 */}
+            {/* 카테고리(가로일직선) 섹션 */}
             <div className="grid grid-cols-9 gap-6 p-4">
               {categories.map((category, index) => (
                 <button 
