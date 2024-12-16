@@ -1,4 +1,3 @@
-// components/Header.js
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FileText } from 'lucide-react';
@@ -8,18 +7,16 @@ import UserMenu from './UserMenu.js';
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // 로그인 성공 처리 함수
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
     closeModal();
   };
 
-  // 로그아웃 처리 함수
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
@@ -36,7 +33,7 @@ function Header() {
             {isLoggedIn ? (
               <>
                 <Link 
-                  to="/workspace" 
+                  to="/ClassWorkSpace" 
                   className="text-gray-600 bg-orange-50 border border-orange-300 hover:bg-orange-100 p-1 px-4 rounded-full mr-4 flex items-center gap-2 font-noto"
                 >
                 <FileText size={18} />
@@ -56,7 +53,6 @@ function Header() {
         </div>
       </header>
 
-      {/* 로그인 모달 컴포넌트 */}
       <LoginModal 
         isOpen={isModalOpen} 
         onClose={closeModal}
